@@ -63,22 +63,6 @@ public class BusDriver implements Serializable{
 		NumBus = numBus;
 	}
 	
-	
-	
-	public BusDriver(Long id, String firstName, String lastName, Date dateDispo, int numBus, Path path,
-			Kindergarten kindergarten) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.dateDispo = dateDispo;
-		NumBus = numBus;
-		this.path = path;
-		this.kindergarten = kindergarten;
-	}
-
-
-
 	public BusDriver() {
 
 	}
