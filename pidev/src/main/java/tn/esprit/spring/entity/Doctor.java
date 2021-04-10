@@ -2,7 +2,7 @@ package tn.esprit.spring.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -35,7 +35,7 @@ public class Doctor implements Serializable {
 	@Column
 	private String lastName;
 	@Column
-	private Date dateDispo;
+	private Jour JourDispo;
 	
 	@ManyToOne(cascade= CascadeType.ALL)
 	@JoinColumn(name="Kinder_id")
@@ -45,12 +45,12 @@ public class Doctor implements Serializable {
 	@JoinColumn(name="doctor")
 	private List<Appointment> appointment = new ArrayList<>();
 	
-	public Doctor(Long id, String firstName, String lastName, Date dateDispo) {
+	public Doctor(Long id, String firstName, String lastName, Jour JourDispo) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.dateDispo = dateDispo;
+		this.JourDispo = JourDispo;
 	}
 	
 	
@@ -98,19 +98,19 @@ public class Doctor implements Serializable {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	@Temporal(TemporalType.DATE)
-	public Date getDateDispo() {
-		return dateDispo;
+
+	public Jour getJourDispo() {
+		return JourDispo;
 	}
-	public void setDateDispo(Date dateDispo) {
-		this.dateDispo = dateDispo;
+	public void setJourDispo(Jour JourDispo) {
+		this.JourDispo = JourDispo;
 	}
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((dateDispo == null) ? 0 : dateDispo.hashCode());
+		result = prime * result + ((JourDispo == null) ? 0 : JourDispo.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
@@ -127,10 +127,10 @@ public class Doctor implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Doctor other = (Doctor) obj;
-		if (dateDispo == null) {
-			if (other.dateDispo != null)
+		if (JourDispo == null) {
+			if (other.JourDispo != null)
 				return false;
-		} else if (!dateDispo.equals(other.dateDispo))
+		} else if (!JourDispo.equals(other.JourDispo))
 			return false;
 		if (firstName == null) {
 			if (other.firstName != null)
@@ -151,9 +151,9 @@ public class Doctor implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Doctor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateDispo=" + dateDispo
+		return "Doctor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", JourDispo=" + JourDispo
 				+ ", getId()=" + getId() + ", getFirstName()=" + getFirstName() + ", getLastName()=" + getLastName()
-				+ ", getDateDispo()=" + getDateDispo() + ", hashCode()=" + hashCode() + "]";
+				+ ", getJourDispo()=" + getJourDispo() + ", hashCode()=" + hashCode() + "]";
 	}
 	
 }
