@@ -10,6 +10,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -54,10 +56,11 @@ public class Parent implements Serializable {
 	private String registrationDate;
 	@Column
 	private Address address;
+	
 	@Column
+	@Enumerated(EnumType.STRING)
 	private Jour jourDispo;
-	@Column
-	private int heureDispo;
+	
 	
 
 	@OneToMany(cascade= CascadeType.ALL,mappedBy="parent")
@@ -214,14 +217,7 @@ public class Parent implements Serializable {
 	}
 
 
-	public int getHeureDispo() {
-		return heureDispo;
-	}
-
-
-	public void setHeureDispo(int heureDispo) {
-		this.heureDispo = heureDispo;
-	}
+	
 
 
 	public List<Post> getPost() {
@@ -299,7 +295,7 @@ public class Parent implements Serializable {
 		result = prime * result + ((child == null) ? 0 : child.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + heureDispo;
+		
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((jourDispo == null) ? 0 : jourDispo.hashCode());
 		result = prime * result + kidsNumber;
@@ -355,8 +351,7 @@ public class Parent implements Serializable {
 				return false;
 		} else if (!firstName.equals(other.firstName))
 			return false;
-		if (heureDispo != other.heureDispo)
-			return false;
+		
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -420,7 +415,7 @@ public class Parent implements Serializable {
 
 	public Parent(Long id, int phoneNumber, String firstName, String lastName, String socialStatus, int kidsNumber,
 			String email, String password, String username, String registrationDate, Address address, Jour jourDispo,
-			int heureDispo, List<Post> post, List<Satisfaction> satisfaction, List<Child> child, Admin admin,
+		 List<Post> post, List<Satisfaction> satisfaction, List<Child> child, Admin admin,
 			Set<Chat> chat, Set<Reclamation> reclamations) {
 		super();
 		this.id = id;
@@ -435,7 +430,7 @@ public class Parent implements Serializable {
 		this.registrationDate = registrationDate;
 		this.address = address;
 		this.jourDispo = jourDispo;
-		this.heureDispo = heureDispo;
+	
 		this.post = post;
 		this.satisfaction = satisfaction;
 		this.child = child;

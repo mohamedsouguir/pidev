@@ -12,9 +12,9 @@ import tn.esprit.spring.entity.Jour;
 @Repository
 public interface DoctorRepository extends CrudRepository< Doctor, Long>{
 	
-	@Query("SELECT count(*) From Doctor")
+	/*@Query("SELECT count(*) From Doctor")
 		public int countdoctor();
 	@Query("SELECT JourDispo From Doctor")
 		public List<Jour> getalldispo();
-	
+	*/
 }

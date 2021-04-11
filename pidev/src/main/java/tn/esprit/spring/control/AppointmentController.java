@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.entity.Appointment;
+import tn.esprit.spring.entity.Doctor;
 import tn.esprit.spring.service.IAppointmentService;
 
 @RestController
@@ -52,5 +53,14 @@ public class AppointmentController {
 		 return new ResponseEntity<>("Appointment have been deleted!", HttpStatus.OK);
 		}
 
+		@PostMapping("/retrieve-Appointment/{user-id}")
+		@ResponseBody
+		public void getAppointment(@PathVariable("user-id") long d) {
+			 userService.createrdv(d);}
+			
+		@PostMapping("/retrieve-Appointment1/{user-id}")
+		@ResponseBody
+		public void getAppontment1(@PathVariable("user-id") long d) {
+			 userService.Donnerrdv(d);}
 }
 

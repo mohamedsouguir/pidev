@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import java.util.List;
-
+import java.util.Map;
+import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="doctor")
@@ -35,7 +38,11 @@ public class Doctor implements Serializable {
 	@Column
 	private String lastName;
 	@Column
+	@Enumerated(EnumType.STRING)
 	private Jour JourDispo;
+	
+
+
 	
 	@ManyToOne(cascade= CascadeType.ALL)
 	@JoinColumn(name="Kinder_id")
@@ -43,16 +50,25 @@ public class Doctor implements Serializable {
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="doctor")
+	
 	private List<Appointment> appointment = new ArrayList<>();
 	
-	public Doctor(Long id, String firstName, String lastName, Jour JourDispo) {
+	/*@OneToMany(cascade = CascadeType.ALL, mappedBy="d")
+	
+	private List<Appointment> a;*/
+	
+	
+	public Doctor(Long id, String firstName, String lastName, Jour jourDispo,
+			Kindergarten kindergarten, List<Appointment> appointment) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.JourDispo = JourDispo;
+		JourDispo = jourDispo;
+		this.kindergarten = kindergarten;
+		this.appointment = appointment;
 	}
-	
+
 	
 	public Doctor() {
 	
