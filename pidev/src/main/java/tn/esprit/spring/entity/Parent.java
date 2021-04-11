@@ -54,7 +54,18 @@ public class Parent implements Serializable {
 	private String registrationDate;
 	@Column
 	private Address address;
+	private String photo;
 	
+	
+
+	public String getPhoto() {
+		return photo;
+	}
+
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 
 	@OneToMany(cascade= CascadeType.ALL,mappedBy="parent")
 	private List<Post> post=new ArrayList<>();
@@ -92,7 +103,7 @@ public class Parent implements Serializable {
 	
 	
 	public Parent(Long id, int phoneNumber, String firstName, String lastName, String socialStatus, int kidsNumber,
-			String email, String password, String username, String registrationDate, Address address) {
+			String email, String password, String username, String registrationDate, Address address ,String photo) {
 		super();
 		this.id = id;
 		this.phoneNumber = phoneNumber;
@@ -105,6 +116,7 @@ public class Parent implements Serializable {
 		this.username = username;
 		this.registrationDate = registrationDate;
 		this.address = address;
+		this.photo =photo ;
 	}
 	
 	
