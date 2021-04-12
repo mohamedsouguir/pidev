@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -35,14 +35,16 @@ public class Post implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="Post_id")
 	private Long id;
+	@Lob
 	@Column
-	private String image;
+	private byte[] image;
 	@Column
 	private Date date;
 	@Column
 	private String description;
+	@Lob
 	@Column
-	private String video;
+	private byte[] video;
 	@Column
 	private TypePost type;
 	
@@ -59,7 +61,7 @@ public class Post implements Serializable{
 	private List<Comment> comment=new ArrayList<>();
 
 	
-	public Post(Long id, String image, Date date, String description, String video, TypePost type) {
+	public Post(Long id, byte[] image, Date date, String description, byte[] video, TypePost type) {
 		super();
 		this.id = id;
 		this.image = image;
@@ -73,6 +75,25 @@ public class Post implements Serializable{
 	}
 	
 		
+	public Post(byte[] image, Date date, String description, byte[] video) {
+			super();
+			this.image = image;
+			this.date = date;
+			this.description = description;
+			this.video = video;
+		}
+	
+	
+	
+	
+	public Post(Long id, byte[] image, Date date, String description, byte[] video) {
+		super();
+		this.id = id;
+		this.image = image;
+		this.date = date;
+		this.description = description;
+		this.video = video;
+	}
 	public Parent getParent() {
 			return parent;
 		}
@@ -97,10 +118,10 @@ public class Post implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getImage() {
+	public byte[] getImage() {
 		return image;
 	}
-	public void setImage(String image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 	
@@ -117,10 +138,10 @@ public class Post implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getVideo() {
+	public byte[] getVideo() {
 		return video;
 	}
-	public void setVideo(String video) {
+	public void setVideo(byte[] video) {
 		this.video = video;
 	}
 	
@@ -191,6 +212,7 @@ public class Post implements Serializable{
 			return false;
 		return true;
 	}
-	
 
 }
+
+
