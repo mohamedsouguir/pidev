@@ -55,9 +55,10 @@ public class Parent implements Serializable {
 	private String registrationDate;
 	@Column
 	private Address address;
-	private String photo;
 	@Lob
 	@Column(columnDefinition="MEDIUMBlob")
+	private String photo;
+	
 	public String getPhoto() {
 		return photo;
 	}
