@@ -1,5 +1,6 @@
 package tn.esprit.spring.control;
 
+import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.support.MultipartFilter;
 
 import tn.esprit.spring.entity.Parent;
 import tn.esprit.spring.service.IParentService;
@@ -59,5 +63,19 @@ public class ParentController {
 	public ResponseEntity<String> modifyUser(@RequestBody Parent user) {
 	return new ResponseEntity<>("User have been modified!", HttpStatus.OK);
 }
+	
+	@PostMapping("/upload")
+	public ResponseEntity<?> addParent( Parent parent, @RequestParam("file") MultipartFile file){
+		String fileName = file.getOriginalFilename();
+		parent.setPhoto(fileName);
+		Parent savedparent = userService.AddParent(parent);
+		try {
+			file.transferTo(new File("C:\\Users\\asus\\Desktop\\Fileupload\\" + fileName));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+		return ResponseEntity.ok("save successfully.");
+		
+	}
 }
 
