@@ -81,10 +81,10 @@ public class ParentController {
 		
 	}
 	@RequestMapping(value="/recherchebyname/{Firstname}")
-	public List<Parent> getParentByFirstName(@PathVariable String Firstname){
+	public List<Parent> getParentByLastName(@PathVariable String Lastname){
 		
 		
-		return Userserviceimpl.getParenByFirstName(Firstname);
+		return Userserviceimpl.getParenByLastName(Lastname);
 	}
 }
 

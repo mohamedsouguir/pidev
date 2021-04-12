@@ -57,8 +57,8 @@ public class ParentServiceImpl implements IParentService {
 		return u;
 		
 	}
-	public List<Parent> getParenByFirstName(String Firstname){
-		return parentRepository.findByFirstName(Firstname);
+	public List<Parent> getParenByLastName(String Firstname){
+		return parentRepository.findByLastName(Firstname);
 		
 		
 	}
