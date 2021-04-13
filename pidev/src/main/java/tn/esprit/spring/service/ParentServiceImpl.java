@@ -52,8 +52,8 @@ public class ParentServiceImpl implements IParentService {
 	}
 
 	@Override
-	public Parent retrieveParent(String id) {
-		Parent u = parentRepository.findById(Long.parseLong(id)).orElse(null);
+	public Parent retrieveParent(Long id) {
+		Parent u = parentRepository.findById(id).get();
 		return u;
 		
 	}
