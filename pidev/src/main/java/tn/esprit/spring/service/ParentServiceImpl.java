@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.entity.Parent;
+import tn.esprit.spring.entity.Preference;
+import tn.esprit.spring.entity.User;
 import tn.esprit.spring.repository.ParentRepository;
+import tn.esprit.spring.repository.UserRepository;
 
 @Service
 public class ParentServiceImpl implements IParentService {
@@ -16,6 +19,9 @@ public class ParentServiceImpl implements IParentService {
 	
 	@Autowired
 	ParentRepository parentRepository;
+	
+	@Autowired
+	UserRepository userRepository;
 	
 	private static final Logger l = LogManager.getLogger(ParentServiceImpl.class);
 
@@ -63,5 +69,22 @@ public class ParentServiceImpl implements IParentService {
 		
 	}
 	
+	/* @Override
+	public List<User> retrieveUserByPreference(Preference preferncee){
+		List<User> users = (List<User>) parentRepository.retrieveProfileByPreference(preferncee);
+		 for (User user : users){
+				l.info("user" + user);
+			}
+		 return users;
+	}*/
+	
+	@Override
+	public List<Parent> retrieveUserByPreference(Preference preferncee){
+		List<Parent> parents = (List<Parent>) parentRepository.retrieveProfileByPreference(preferncee);
+		 for (Parent parent : parents){
+				l.info("parent" + parent);
+			}
+		 return parents;
+	}
 	
 }

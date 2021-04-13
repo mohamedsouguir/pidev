@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import tn.esprit.spring.entity.Doctor;
 import tn.esprit.spring.repository.DoctorRepository;
@@ -34,4 +35,6 @@ public class DoctorServiceImpl implements DoctorService {
 	public Doctor retrieveDoctor(long id){
 		return DoctorRepository.findById(id).get();
 	}
+	
+
 }

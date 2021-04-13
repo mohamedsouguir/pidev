@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -49,41 +51,47 @@ public class Doctor implements Serializable {
 	private Kindergarten kindergarten;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="doctor")
 	
-	private List<Appointment> appointment = new ArrayList<>();
+	
+	private Set<Appointment> appointments ;
 	
 	/*@OneToMany(cascade = CascadeType.ALL, mappedBy="d")
 	
 	private List<Appointment> a;*/
 	
 	
+	
+
+
 	public Doctor(Long id, String firstName, String lastName, Jour jourDispo,
-			Kindergarten kindergarten, List<Appointment> appointment) {
+			Kindergarten kindergarten, Set<Appointment> appointment) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		JourDispo = jourDispo;
 		this.kindergarten = kindergarten;
-		this.appointment = appointment;
+		this.appointments = appointment;
 	}
 
 	
+	public Set<Appointment> getAppointments() {
+		return appointments;
+	}
+
+
+	public void setAppointments(Set<Appointment> appointments) {
+		this.appointments = appointments;
+	}
+
+
 	public Doctor() {
 	
 	}
 
 
 
-	public List<Appointment> getAppointment() {
-		return appointment;
-	}
-
-
-	public void setAppointment(List<Appointment> appointment) {
-		this.appointment = appointment;
-	}
+	
 
 
 	public Kindergarten getKindergarten() {

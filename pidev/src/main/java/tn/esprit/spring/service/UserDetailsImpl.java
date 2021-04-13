@@ -23,7 +23,7 @@ public class UserDetailsImpl implements UserDetails {
 
 	private String email;
 
-	@JsonIgnore
+	@JsonIgnore 
 	private String password;
 	
 	private String firstName;

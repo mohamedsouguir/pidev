@@ -21,8 +21,8 @@ public class EmailService {
     {
         boolean foo = false; // Set the false, default variable "foo", we will allow it after sending code process email
 
-        String senderEmail = "mohamed.souguir@ieee.org"; // your gmail email id
-        String senderPassword = "azerty1997$"; // your gmail id password
+        String senderEmail = "mohamedsouguir123456789@gmail.com"; // your gmail email id
+        String senderPassword = "azerty1997$$"; // your gmail id password
 
         // Properties class enables us to connect to the host SMTP server
         Properties properties = new Properties();

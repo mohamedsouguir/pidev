@@ -20,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.MultipartFilter;
 
 import tn.esprit.spring.entity.Parent;
+import tn.esprit.spring.entity.Preference;
+import tn.esprit.spring.entity.User;
 import tn.esprit.spring.service.IParentService;
 import tn.esprit.spring.service.ParentServiceImpl;
 
@@ -67,6 +69,14 @@ public class ParentController {
 	return new ResponseEntity<>("User have been modified!", HttpStatus.OK);
 }
 	
+
+	@GetMapping("/retrieve-user-preference/{preference}")
+	@ResponseBody
+	public List<Parent> retrieveProfileByPreference(@PathVariable("preference") String preference) {
+		Preference preference1 = Preference.valueOf(preference);
+		return userService.retrieveUserByPreference(preference1);
+		}
+
 	@PostMapping("/upload")
 	public ResponseEntity<?> addParent( Parent parent, @RequestParam("file") MultipartFile file){
 		String fileName = file.getOriginalFilename();
@@ -80,11 +90,13 @@ public class ParentController {
 		return ResponseEntity.ok("save successfully.");
 		
 	}
+
 	@RequestMapping(value="/recherchebyname/{Firstname}")
 	public List<Parent> getParentByLastName(@PathVariable String Lastname){
 		
 		
 		return Userserviceimpl.getParenByLastName(Lastname);
 	}
+
 }
 

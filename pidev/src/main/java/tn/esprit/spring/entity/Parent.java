@@ -75,7 +75,49 @@ public class Parent implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Jour jourDispo;
 	
+	@Column
+	@Enumerated(EnumType.STRING)
+	private Preference pref;
 	
+	
+
+
+	public Parent(Long id, int phoneNumber, String firstName, String lastName, String socialStatus, int kidsNumber,
+			String email, String password, String username, String registrationDate, Address address, Jour jourDispo,
+			Preference pref, List<Post> post, List<Satisfaction> satisfaction, List<Child> child, Admin admin,
+			Set<Chat> chat, Set<Reclamation> reclamations) {
+		super();
+		this.id = id;
+		this.phoneNumber = phoneNumber;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.socialStatus = socialStatus;
+		this.kidsNumber = kidsNumber;
+		this.email = email;
+		this.password = password;
+		this.username = username;
+		this.registrationDate = registrationDate;
+		this.address = address;
+		this.jourDispo = jourDispo;
+		this.pref = pref;
+		this.post = post;
+		this.satisfaction = satisfaction;
+		this.child = child;
+		this.admin = admin;
+		this.chat = chat;
+		this.reclamations = reclamations;
+	}
+
+
+	public Preference getPref() {
+		return pref;
+	}
+
+
+	public void setPref(Preference pref) {
+		this.pref = pref;
+	}
+
 
 
 	@OneToMany(cascade= CascadeType.ALL,mappedBy="parent")

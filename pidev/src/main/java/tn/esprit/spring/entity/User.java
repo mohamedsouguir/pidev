@@ -44,6 +44,34 @@ public class User {
 	
 	@Column(name="Adress")
 	private String adress;
+	
+	@Column
+	@Enumerated(EnumType.STRING)
+	private Preference pref;
+
+	public User(Long id, @NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 50) @Email String email,
+			@NotBlank @Size(max = 120) String password, String firstName, String lastName, int phone, String adress,
+			Preference pref, Set<Role> roles) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phone = phone;
+		this.adress = adress;
+		this.pref = pref;
+		this.roles = roles;
+	}
+
+	public Preference getPref() {
+		return pref;
+	}
+
+	public void setPref(Preference pref) {
+		this.pref = pref;
+	}
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(	name = "user_roles", 
