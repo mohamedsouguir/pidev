@@ -3,6 +3,8 @@ package tn.esprit.spring.service;
 import java.util.List;
 
 import tn.esprit.spring.entity.Parent;
+import tn.esprit.spring.entity.Preference;
+import tn.esprit.spring.entity.User;
 
 public interface IParentService {
 	List<Parent> retrieveAllParents();
@@ -10,5 +12,6 @@ public interface IParentService {
 	void deleteParent(String id);
 	Parent updateParent(Parent u);
 	Parent retrieveParent(String id);
+	List<Parent> retrieveUserByPreference(Preference preferncee);
 
 }
