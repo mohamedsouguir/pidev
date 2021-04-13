@@ -19,7 +19,8 @@ import tn.esprit.spring.dto.PostDto;
 import tn.esprit.spring.entity.Kindergarten;
 import tn.esprit.spring.entity.Parent;
 import tn.esprit.spring.entity.Post;
-import tn.esprit.spring.repository.ParentRepository;
+
+//import tn.esprit.spring.repository.ParentRepository;
 import tn.esprit.spring.repository.PostRepository;
 @Service 
 public class PostServiceImpl implements PostService {
@@ -27,8 +28,8 @@ public class PostServiceImpl implements PostService {
 
 	@Autowired
 	PostRepository postRepository;
-	@Autowired
-	ParentRepository parentRepository;
+	//@Autowired
+	//ParentRepository parentRepository;
 	
 	//private static final Logger L=LogManager.getLogger(PostServiceImpl.class);
 	
@@ -57,13 +58,21 @@ public class PostServiceImpl implements PostService {
 		long millis=System.currentTimeMillis(); 
 		post.setDate(new Date(millis));
 		
-		if (badWordsFound(p.getDescription() )==null ) {
-			
-		post.setDescription(p.getDescription()); 
+	
+		// post.setDescription(p.getDescription()  );
 		
-		} else 
-		post.setDescription("*******")	;
-		//System.out.println("description contient des mots inappropriés ");	
+		
+			
+		if (badWordsFound(p.getDescription() )==false ) {
+			
+		 
+			post.setDescription(p.getDescription());
+		} 
+		else  { 
+			
+			post.setDescription("*******")	;
+			System.out.println("description contient des mots inappropriés ");	
+		} 
 		
 		Kindergarten kindergarten = null;
 		Parent parent = null;
@@ -118,7 +127,7 @@ static Map<String, String[]> words = new HashMap<>();
     
     static int largestWordLength = 0;
     
-	public static void loadConfigs() {
+	 public static void loadConfigs() {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(new URL("https://docs.google.com/spreadsheets/d/1hIEi2YG3ydav1E06Bzf2mQbGZ12kh2fe4ISgLg_UBuM/export?format=csv").openConnection().getInputStream()));
             String line = "";
@@ -156,17 +165,73 @@ static Map<String, String[]> words = new HashMap<>();
         
         
     }
+    
+    /*
+    private static void loadBadWords() {
+        int readCounter = 0;
+        try {
+          // The following spreadsheet is from: https://gist.github.com/PimDeWitte/c04cc17bc5fa9d7e3aee6670d4105941
+          // (If the spreadsheet ever ceases to exist, then this application will still function normally otherwise - it just won't censor any swear words.)
+          
+        	     FileReader fr = new FileReader("C:\\Users\\sshah\\Downloads\\Word_Filter - Sheet1.csv");
+        	     BufferedReader reader = new BufferedReader(fr);
+        	      
+//        	BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(
+//              "https://docs.google.com/spreadsheets/d/1hIEi2YG3ydav1E06Bzf2mQbGZ12kh2fe4ISgLg_UBuM/export?format=csv")
+//              .openConnection().getInputStream()));
+          
+          
+          String currentLine = "";
+          while ((currentLine = reader.readLine()) != null) {
+            readCounter++;
+            String[] content = null;
+            try {
+              if (1 == readCounter) {
+                continue;
+              }
+
+              content = currentLine.split(",");
+              if (content.length == 0) {
+                continue;
+              }
+
+              final String word = content[0];
+
+              if (word.startsWith("-----")) {
+                continue;
+              }
+
+              if (word.length() > largestWordLength) {
+                largestWordLength = word.length();
+              }
+
+              String[] ignore_in_combination_with_words = new String[] {};
+              if (content.length > 1) {
+                ignore_in_combination_with_words = content[1].split("_");
+              }
+
+              // Make sure there are no capital letters in the spreadsheet
+              allBadWords.put(word.replaceAll(" ", "").toLowerCase(), ignore_in_combination_with_words);
+            } catch (Exception except) {
+            }
+          } // end while
+        } catch (IOException except) {
+        }
+      } // end loadBadWords
+    */
+    
+
 	
-	  public static ArrayList<String> badWordsFound(String input) {
-	        if(input == null) {
-	            return new ArrayList<>();
-	        }
-
-
+	  public static boolean badWordsFound(String input) {
+	        
+	      
+		   loadConfigs();
+		  	System.out.println("**********************************************"+input);
 	        ArrayList<String> badWords = new ArrayList<>();
 	        input = input.toLowerCase().replaceAll("[^a-zA-Z]", "");
 
 	        // iterate over each letter in the word
+	        boolean ignore = false;
 	        for(int start = 0; start < input.length(); start++) {
 	            // from each letter, keep going to find bad words until either the end of the sentence is reached, or the max word length is reached. 
 	            for(int offset = 1; offset < (input.length()+1 - start) && offset < largestWordLength; offset++)  {
@@ -174,11 +239,11 @@ static Map<String, String[]> words = new HashMap<>();
 	                if(words.containsKey(wordToCheck)) {
 	                    // for example, if you want to say the word bass, that should be possible.
 	                    String[] ignoreCheck = words.get(wordToCheck);
-	                    boolean ignore = false;
+	                    
 	                    for(int s = 0; s < ignoreCheck.length; s++ ) {
 	                        if(input.contains(ignoreCheck[s])) {
 	                            ignore = true;
-	                            break;
+	                           break;
 	                        }
 	                    }
 	                    if(!ignore) {
@@ -188,17 +253,17 @@ static Map<String, String[]> words = new HashMap<>();
 	            }
 	        }
 
-
+	        
 	        for(String s: badWords) {
-	            System.out.println(s + " qualified as a bad word in a username");
+	            System.out.println(s + " qualified as a bad word");
 	        }
-	        return badWords;
+	        return badWords==null ;
 
 	    }
+	 
 	  
 	  
-	  
-	  
+	 /* 
 	  
 	  @Transactional
 		public void affecterPublicationAParent(int parentId, int postId) {
@@ -219,6 +284,6 @@ static Map<String, String[]> words = new HashMap<>();
 			parentRepository.save(parentEntity); 
 
 		}
-
+*/
 	
 }
