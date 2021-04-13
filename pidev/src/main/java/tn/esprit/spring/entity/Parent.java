@@ -76,10 +76,19 @@ public class Parent implements Serializable {
 	private Jour jourDispo;
 	
 	@Column
+
+	private int nb_reclamation;
+
 	@Enumerated(EnumType.STRING)
 	private Preference pref;
 	
+
 	
+	public int getNb_reclamation() {
+		return nb_reclamation;
+	}
+	public void setNb_reclamation(int nb_reclamation) {
+		this.nb_reclamation = nb_reclamation;}
 
 
 	public Parent(Long id, int phoneNumber, String firstName, String lastName, String socialStatus, int kidsNumber,
