@@ -174,10 +174,7 @@ public class Parent implements Serializable {
 	}
 	
 	
-	public Parent() {
-		
-	}
-
+	
 
 
 	public Long getId() {

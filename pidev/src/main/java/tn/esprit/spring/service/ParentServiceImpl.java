@@ -63,6 +63,11 @@ public class ParentServiceImpl implements IParentService {
 		return u;
 		
 	}
+	public List<Parent> getParenByLastName(String Firstname){
+		return parentRepository.findByLastName(Firstname);
+		
+		
+	}
 	
 	/* @Override
 	public List<User> retrieveUserByPreference(Preference preferncee){

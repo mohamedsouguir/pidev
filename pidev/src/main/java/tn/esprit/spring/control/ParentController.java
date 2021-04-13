@@ -23,6 +23,7 @@ import tn.esprit.spring.entity.Parent;
 import tn.esprit.spring.entity.Preference;
 import tn.esprit.spring.entity.User;
 import tn.esprit.spring.service.IParentService;
+import tn.esprit.spring.service.ParentServiceImpl;
 
 @RestController
 @RequestMapping
@@ -30,6 +31,8 @@ public class ParentController {
 
 	@Autowired
   private IParentService userService;
+	@Autowired
+	private ParentServiceImpl Userserviceimpl;
 	
 	@GetMapping("/retrieveallusers")
 	@ResponseBody()
@@ -86,6 +89,13 @@ public class ParentController {
 		}
 		return ResponseEntity.ok("save successfully.");
 		
+	}
+
+	@RequestMapping(value="/recherchebyname/{Firstname}")
+	public List<Parent> getParentByLastName(@PathVariable String Lastname){
+		
+		
+		return Userserviceimpl.getParenByLastName(Lastname);
 	}
 
 }
