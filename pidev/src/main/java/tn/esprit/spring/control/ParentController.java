@@ -66,8 +66,10 @@ public class ParentController {
 	@PutMapping("/modify-user")
 	@ResponseBody
 	public ResponseEntity<String> modifyUser(@RequestBody Parent user) {
+		userService.updateParent(user);
 	return new ResponseEntity<>("User have been modified!", HttpStatus.OK);
 }
+	
 	
 
 	@GetMapping("/retrieve-user-preference/{preference}")
