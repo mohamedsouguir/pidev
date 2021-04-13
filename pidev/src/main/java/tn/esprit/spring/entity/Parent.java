@@ -497,8 +497,7 @@ public class Parent implements Serializable {
 
 
 	public Parent() {
-		super();
-		// TODO Auto-generated constructor stub
+	
 	}
 
 
