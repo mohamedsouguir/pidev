@@ -20,6 +20,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
+import com.sun.istack.NotNull;
 
 
 @Entity
@@ -43,12 +47,16 @@ public class Kindergarten implements Serializable  {
 	@Column
 	private int EmployeNumber;
 	@Column
+	@NotNull
 	private int phone;
 	@Column
+	@NotBlank(message = "firstname is mandatory")
 	private String firstName;
 	@Column
+	@NotBlank(message = "lastname is mandatory")
 	private String lastName;
 	@Column
+	@Email
 	private String email;
 	@Column
 	private String  password;
