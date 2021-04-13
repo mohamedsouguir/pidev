@@ -2,9 +2,12 @@ package tn.esprit.spring.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +20,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="doctor")
@@ -35,39 +40,58 @@ public class Doctor implements Serializable {
 	@Column
 	private String lastName;
 	@Column
-	private Date dateDispo;
+	@Enumerated(EnumType.STRING)
+	private Jour JourDispo;
+	
+
+
 	
 	@ManyToOne(cascade= CascadeType.ALL)
 	@JoinColumn(name="Kinder_id")
 	private Kindergarten kindergarten;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="doctor")
-	private List<Appointment> appointment = new ArrayList<>();
 	
-	public Doctor(Long id, String firstName, String lastName, Date dateDispo) {
+	
+	private Set<Appointment> appointments ;
+	
+	/*@OneToMany(cascade = CascadeType.ALL, mappedBy="d")
+	
+	private List<Appointment> a;*/
+	
+	
+	
+
+
+	public Doctor(Long id, String firstName, String lastName, Jour jourDispo,
+			Kindergarten kindergarten, Set<Appointment> appointment) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.dateDispo = dateDispo;
+		JourDispo = jourDispo;
+		this.kindergarten = kindergarten;
+		this.appointments = appointment;
 	}
+
 	
-	
+	public Set<Appointment> getAppointments() {
+		return appointments;
+	}
+
+
+	public void setAppointments(Set<Appointment> appointments) {
+		this.appointments = appointments;
+	}
+
+
 	public Doctor() {
 	
 	}
 
 
 
-	public List<Appointment> getAppointment() {
-		return appointment;
-	}
-
-
-	public void setAppointment(List<Appointment> appointment) {
-		this.appointment = appointment;
-	}
+	
 
 
 	public Kindergarten getKindergarten() {
@@ -98,19 +122,19 @@ public class Doctor implements Serializable {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	@Temporal(TemporalType.DATE)
-	public Date getDateDispo() {
-		return dateDispo;
+
+	public Jour getJourDispo() {
+		return JourDispo;
 	}
-	public void setDateDispo(Date dateDispo) {
-		this.dateDispo = dateDispo;
+	public void setJourDispo(Jour JourDispo) {
+		this.JourDispo = JourDispo;
 	}
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((dateDispo == null) ? 0 : dateDispo.hashCode());
+		result = prime * result + ((JourDispo == null) ? 0 : JourDispo.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
@@ -127,10 +151,10 @@ public class Doctor implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Doctor other = (Doctor) obj;
-		if (dateDispo == null) {
-			if (other.dateDispo != null)
+		if (JourDispo == null) {
+			if (other.JourDispo != null)
 				return false;
-		} else if (!dateDispo.equals(other.dateDispo))
+		} else if (!JourDispo.equals(other.JourDispo))
 			return false;
 		if (firstName == null) {
 			if (other.firstName != null)
@@ -151,9 +175,9 @@ public class Doctor implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Doctor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateDispo=" + dateDispo
+		return "Doctor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", JourDispo=" + JourDispo
 				+ ", getId()=" + getId() + ", getFirstName()=" + getFirstName() + ", getLastName()=" + getLastName()
-				+ ", getDateDispo()=" + getDateDispo() + ", hashCode()=" + hashCode() + "]";
+				+ ", getJourDispo()=" + getJourDispo() + ", hashCode()=" + hashCode() + "]";
 	}
 	
 }

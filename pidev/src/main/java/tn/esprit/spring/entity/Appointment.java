@@ -3,11 +3,19 @@ package tn.esprit.spring.entity;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,10 +33,12 @@ public class Appointment implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="Appointment_id")
 	private Long id;
+	
 	@Column
-	private Date date;
+	@Enumerated(EnumType.STRING)
+	private Jour date;
 	@Column
-	private Time time;
+	private int time;
 	@Column
 	private String objectif;
 	@Column
@@ -36,10 +46,12 @@ public class Appointment implements Serializable {
 	@Column
 	private String kindergartenName;
 	
+	@ManyToOne
+	private Doctor doctor;
 	
 	
 	
-	public Appointment(Long id, Date date, Time time, String objectif, String parentName, String kindergartenName) {
+	public Appointment(Long id, Jour date, int time, String objectif, String parentName, String kindergartenName) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -64,19 +76,31 @@ public class Appointment implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	@Temporal(TemporalType.DATE)
-	public Date getDate() {
+
+	public Jour getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(Jour date) {
 		this.date = date;
 	}
 	
-	@Temporal(TemporalType.TIME)
-	public Time getTime() {
+	
+	public Doctor getD() {
+		return doctor;
+	}
+
+
+
+	public void setD(Doctor d) {
+		this.doctor = d;
+	}
+
+
+
+	public int getTime() {
 		return time;
 	}
-	public void setTime(Time time) {
+	public void setTime(int time) {
 		this.time = time;
 	}
 	public String getObjectif() {
@@ -97,18 +121,23 @@ public class Appointment implements Serializable {
 	public void setKindergartenName(String kindergartenName) {
 		this.kindergartenName = kindergartenName;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((doctor == null) ? 0 : doctor.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((kindergartenName == null) ? 0 : kindergartenName.hashCode());
 		result = prime * result + ((objectif == null) ? 0 : objectif.hashCode());
 		result = prime * result + ((parentName == null) ? 0 : parentName.hashCode());
-		result = prime * result + ((time == null) ? 0 : time.hashCode());
+		result = prime * result + time;
 		return result;
 	}
+
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -118,6 +147,11 @@ public class Appointment implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Appointment other = (Appointment) obj;
+		if (doctor == null) {
+			if (other.doctor != null)
+				return false;
+		} else if (!doctor.equals(other.doctor))
+			return false;
 		if (date == null) {
 			if (other.date != null)
 				return false;
@@ -143,13 +177,13 @@ public class Appointment implements Serializable {
 				return false;
 		} else if (!parentName.equals(other.parentName))
 			return false;
-		if (time == null) {
-			if (other.time != null)
-				return false;
-		} else if (!time.equals(other.time))
+		if (time != other.time)
 			return false;
 		return true;
 	}
+
+
+
 	@Override
 	public String toString() {
 		return "Appointment [id=" + id + ", date=" + date + ", time=" + time + ", objectif=" + objectif

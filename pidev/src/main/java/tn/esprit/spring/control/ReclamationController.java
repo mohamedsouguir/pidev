@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.entity.Reclamation;
 import tn.esprit.spring.service.IReclamationService;
-
 @RestController
 @RequestMapping
 public class ReclamationController {
 	
 	@Autowired
 	  private IReclamationService userService;
+	
 		
 		@GetMapping("/retrivereclamation")
 		@ResponseBody()
@@ -52,6 +52,10 @@ public class ReclamationController {
 		 return new ResponseEntity<>("Relamation have been deleted!", HttpStatus.OK);
 		}
 		
-		
-
+		@PostMapping("/addrec/{id_parent}")
+		public ResponseEntity<Reclamation> addrec(@PathVariable("id_parent") Long id, @RequestBody Reclamation claim){
+			
+			Reclamation c = userService.Addrec(id, claim);
+			return new ResponseEntity<Reclamation>(c, HttpStatus.CREATED);
+		}
 }

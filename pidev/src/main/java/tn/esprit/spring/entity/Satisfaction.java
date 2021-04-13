@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 
 
@@ -55,6 +57,9 @@ public class Satisfaction implements Serializable {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
+	@Size(max=500, message="Your response cannot exceed 150 characters")
+	@NotEmpty(message="Your response cannot be empty")
 	public String getReponse() {
 		return reponse;
 	}

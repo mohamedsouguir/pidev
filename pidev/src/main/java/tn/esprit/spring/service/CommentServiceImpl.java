@@ -37,7 +37,10 @@ public class CommentServiceImpl implements CommentService{
 		return CommentRepository.findById(id).get();
 	}
 	
-	
+	@Override
+	public Comment saveComment(Comment comment) {
+		return CommentRepository.save(comment);
+	}
 }
 
 

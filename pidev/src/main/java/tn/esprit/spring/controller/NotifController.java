@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,6 +45,14 @@ public class NotifController {
 			Notif notif = notifService.addNotif(p);
  	return notif;
 			  }
+		
+		// http://localhost:8081/SpringMVC/servlet/modify-notif
+		
+				@PutMapping("/modify-notif")
+				@ResponseBody
+				public Notif modifyNotif(@RequestBody Notif notif) {
+					return notifService.updateNotif(notif);
+				}
 	// http://localhost:8081/SpringMVC/servlet/Notif-user/{Notif-id}
 				  
 	    @DeleteMapping("/Notif-user/{Notif-id}")

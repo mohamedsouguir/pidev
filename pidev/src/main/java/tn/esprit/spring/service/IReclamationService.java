@@ -11,4 +11,5 @@ public interface IReclamationService {
 	void deleteReclamation(String id);
 	
 	Reclamation retrieveReclamation(String id);
+	public Reclamation Addrec(Long idparent,Reclamation c);
 }
