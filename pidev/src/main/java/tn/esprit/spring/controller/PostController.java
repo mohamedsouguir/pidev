@@ -66,9 +66,9 @@ public class PostController {
 		postService.deletePost(PostId);
 				   }
 	 // http://localhost:8081/SpringMVC/servlet/affecterPublicationAParent/1/1
-		@PutMapping(value = "/affecterPublicationAParent/{idpost}/{idparent}") 
-		public void affecterPublicationAParent(@PathVariable("idpost")int postId, @PathVariable("idparent")int parentId) {
-			postService.affecterPublicationAParent(postId, parentId);
+	//	@PutMapping(value = "/affecterPublicationAParent/{idpost}/{idparent}") 
+	//	public void affecterPublicationAParent(@PathVariable("idpost")int postId, @PathVariable("idparent")int parentId) {
+	//		postService.affecterPublicationAParent(postId, parentId);
 			
-		}
+	//	}
 }
