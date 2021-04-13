@@ -75,7 +75,14 @@ public class Parent implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Jour jourDispo;
 	
+	@Column
+	private int nb_reclamation;
 	
+	public int getNb_reclamation() {
+		return nb_reclamation;
+	}
+	public void setNb_reclamation(int nb_reclamation) {
+		this.nb_reclamation = nb_reclamation;}
 
 
 	@OneToMany(cascade= CascadeType.ALL,mappedBy="parent")
