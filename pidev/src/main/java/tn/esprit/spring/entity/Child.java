@@ -27,6 +27,8 @@ public class Child implements Serializable{
 	private String LastName;
 	@Column
 	private int age;
+	@Column
+	private Tarif tarif;
 
 
 	
@@ -43,6 +45,18 @@ public class Child implements Serializable{
 	
 	public Child() {
 
+	}
+
+
+
+	public Tarif getTarif() {
+		return tarif;
+	}
+
+
+
+	public void setTarif(Tarif tarif) {
+		this.tarif = tarif;
 	}
 
 

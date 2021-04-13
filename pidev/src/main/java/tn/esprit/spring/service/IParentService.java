@@ -11,7 +11,11 @@ public interface IParentService {
 	Parent AddParent(Parent u);
 	void deleteParent(String id);
 	Parent updateParent(Parent u);
+
+	Parent retrieveParent(Long id);
+
 	Parent retrieveParent(String id);
 	List<Parent> retrieveUserByPreference(Preference preferncee);
+
 
 }

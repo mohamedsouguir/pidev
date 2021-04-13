@@ -43,8 +43,8 @@ public class ParentController {
 	
 	@GetMapping("/retrieve-user/{user-id}")
 	@ResponseBody
-	public Parent retrieveUser(@PathVariable("user-id") String userId) {
-	return userService.retrieveParent(userId);
+	public Parent retrieveUser(@PathVariable("id") Long id) {
+	return userService.retrieveParent(id);
 	}
 	
 	
