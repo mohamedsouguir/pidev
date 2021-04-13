@@ -120,4 +120,12 @@ public class AppointmentServiceImpl implements IAppointmentService {
 		result = emailService.sendEmail("rendez-vous", msg, p.getEmail());
 
 	}
+	
+	@Override
+	public void affecterAppointmentToDoctor(long appId, long docId) {
+		Appointment a = appointmentRepository.findById((long) appId).get();
+		Doctor d = doctorRepository.findById(docId).get();
+		d.getAppointments().add(a);
+		appointmentRepository.save(a);
 }
+	}

@@ -13,5 +13,7 @@ public interface IAppointmentService {
 	Appointment retrieveAppointment(String id);
 	public void createrdv(long d);
 	public void Donnerrdv(long id);
+	
+	public void affecterAppointmentToDoctor(long appId, long docId);
 
 }

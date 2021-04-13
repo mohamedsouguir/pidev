@@ -22,33 +22,35 @@ import tn.esprit.spring.service.DoctorService;
 public class DoctorController {
 	@Autowired
 	DoctorService DoctorService;
-	// http://localhost:8080/SpringMVC/servlet/retrieve-all-Doctors
+	
 	 @GetMapping("/retrieve-all-Doctors")
 	 @ResponseBody
 	 public List<Doctor> getDoctors() {
 	List<Doctor> list = DoctorService.retrieveAllDoctors();
 	 return list;
 	 } 
-	// http://localhost:8080/SpringMVC/servlet/retrieve-Doctor/{Doctor-id}
+	
 	  @GetMapping("/retrieve-Doctor/{Doctor-id}")
 	  @ResponseBody
 	  public Doctor retrieveUser(@PathVariable("Doctor-id") int DoctorId) {
 	  return DoctorService.retrieveDoctor(DoctorId);
 	  }
-	  // Ajouter Doctor : http://localhost:8080/SpringMVC/servlet/add-Doctor
+	  
 	  @PostMapping("/add-Doctor")
 	  @ResponseBody
 	  public Doctor addDoctor(@RequestBody Doctor c) {
 		  Doctor Doctor = DoctorService.addDoctor(c);
 	 return Doctor;
 	  }
-
-	   // http://localhost:8080/SpringMVC/servlet/Comment-user/{Comment-id}
-	  
-	  @DeleteMapping("/Doctor-user/{Doctor-id}")
+	   @DeleteMapping("/Doctor-user/{Doctor-id}")
 	   @ResponseBody
 	   public void removeDoctor(@PathVariable("Doctor-id") int DoctorId) {
 		  DoctorService.deleteDoctor(DoctorId);
 	   }
+	   @PutMapping("/modify-Doctor")
+		@ResponseBody
+		public Doctor modifyDoctor(@RequestBody Doctor p) {
+		return DoctorService.updateDoctor(p);
+		}
 	 
 }
