@@ -47,7 +47,7 @@ public class Appointment implements Serializable {
 	private String kindergartenName;
 	
 	@ManyToOne
-	Doctor d;
+	private Doctor doctor;
 	
 	
 	
@@ -86,13 +86,13 @@ public class Appointment implements Serializable {
 	
 	
 	public Doctor getD() {
-		return d;
+		return doctor;
 	}
 
 
 
 	public void setD(Doctor d) {
-		this.d = d;
+		this.doctor = d;
 	}
 
 
@@ -126,7 +126,7 @@ public class Appointment implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((d == null) ? 0 : d.hashCode());
+		result = prime * result + ((doctor == null) ? 0 : doctor.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((kindergartenName == null) ? 0 : kindergartenName.hashCode());
@@ -147,10 +147,10 @@ public class Appointment implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Appointment other = (Appointment) obj;
-		if (d == null) {
-			if (other.d != null)
+		if (doctor == null) {
+			if (other.doctor != null)
 				return false;
-		} else if (!d.equals(other.d))
+		} else if (!doctor.equals(other.doctor))
 			return false;
 		if (date == null) {
 			if (other.date != null)

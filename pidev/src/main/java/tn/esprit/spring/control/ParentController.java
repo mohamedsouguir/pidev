@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.entity.Parent;
+import tn.esprit.spring.entity.Preference;
+import tn.esprit.spring.entity.User;
 import tn.esprit.spring.service.IParentService;
 
 @RestController
@@ -59,5 +61,12 @@ public class ParentController {
 	public ResponseEntity<String> modifyUser(@RequestBody Parent user) {
 	return new ResponseEntity<>("User have been modified!", HttpStatus.OK);
 }
+	
+	@GetMapping("/retrieve-user-preference/{preference}")
+	@ResponseBody
+	public List<Parent> retrieveProfileByPreference(@PathVariable("preference") String preference) {
+		Preference preference1 = Preference.valueOf(preference);
+		return userService.retrieveUserByPreference(preference1);
+		}
 }
 
