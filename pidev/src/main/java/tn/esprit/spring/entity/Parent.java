@@ -17,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -56,7 +57,20 @@ public class Parent implements Serializable {
 	private String registrationDate;
 	@Column
 	private Address address;
+	@Lob
+	@Column(columnDefinition="MEDIUMBlob")
+	private String photo;
 	
+
+	public String getPhoto() {
+		return photo;
+	}
+
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
 	@Column
 	@Enumerated(EnumType.STRING)
 	private Jour jourDispo;
@@ -66,6 +80,7 @@ public class Parent implements Serializable {
 	private Preference pref;
 	
 	
+
 
 	public Parent(Long id, int phoneNumber, String firstName, String lastName, String socialStatus, int kidsNumber,
 			String email, String password, String username, String registrationDate, Address address, Jour jourDispo,
@@ -104,6 +119,7 @@ public class Parent implements Serializable {
 	}
 
 
+
 	@OneToMany(cascade= CascadeType.ALL,mappedBy="parent")
 	private List<Post> post=new ArrayList<>();
 	
@@ -136,6 +152,32 @@ public class Parent implements Serializable {
 	@JoinTable(name="parent_reclamation",joinColumns= {@JoinColumn(name="parent_fk")},
 	inverseJoinColumns = {@JoinColumn(name ="reclamation_fk")})
 	private Set<Reclamation> reclamations = new HashSet<>();
+
+	
+	
+	
+	public Parent(Long id, int phoneNumber, String firstName, String lastName, String socialStatus, int kidsNumber,
+			String email, String password, String username, String registrationDate, Address address ,String photo) {
+		super();
+		this.id = id;
+		this.phoneNumber = phoneNumber;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.socialStatus = socialStatus;
+		this.kidsNumber = kidsNumber;
+		this.email = email;
+		this.password = password;
+		this.username = username;
+		this.registrationDate = registrationDate;
+		this.address = address;
+		this.photo =photo ;
+	}
+	
+	
+	public Parent() {
+		
+	}
+
 
 
 	public Long getId() {
