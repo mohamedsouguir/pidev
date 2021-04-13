@@ -9,6 +9,6 @@ public interface IParentService {
 	Parent AddParent(Parent u);
 	void deleteParent(String id);
 	Parent updateParent(Parent u);
-	Parent retrieveParent(String id);
+	Parent retrieveParent(Long id);
 
 }
